@@ -1,6 +1,6 @@
 require("dotenv").config();
 const express = require("express");
-const { default: mongoose, Mongoose } = require("mongoose");
+const { default: mongoose } = require("mongoose");
 const app = express();
 const User = mongoose.model(
   "User",
@@ -8,6 +8,8 @@ const User = mongoose.model(
     name: String,
   })
 );
+console.log(process.env.DB_URI);
+
 mongoose.connect(process.env.DB_URI, {
   dbName: "node_simple",
 });
@@ -17,6 +19,6 @@ app.get("*", async (req, res) => {
   });
   res.json(newUser);
 });
-app.listen(5000, () => {
+app.listen(5001, () => {
   console.log("Server Started");
 });
